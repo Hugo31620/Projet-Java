@@ -136,6 +136,7 @@ form {
 	border: none;
 	height: 40px;
 	font-size: 1.35em;
+	margin-bottom: 20px;
 }
 
 .login button {
@@ -151,7 +152,6 @@ form {
 	color: white;
 	font-size: 15px;
 	font-weight: 500;
-	margin-top: 40px;
 	margin: 0 auto;
 	
 }

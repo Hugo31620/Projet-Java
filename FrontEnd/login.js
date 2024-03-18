@@ -1,45 +1,33 @@
-
-const email = document.querySelector("form #email");
-const password = document.querySelector("form #password");
 const form = document.querySelector("form");
-const messageErreur = document.querySelector(".login p");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
 
-// fonction qui recupere les users
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const login = {
+    email: email.value,
+    password: password.value,
+  };
 
-async function getUsers() {
-  const response = await fetch("http://localhost:5678/api/users/login");
-  return await response.json();
-}
-
-// fonction de connexion
-
-async function login() {
-  const users = await getUsers();
-  console.log(users);
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const userEmail = email.value;
-    const userPwd = password.value;
-    console.log(userEmail, userPwd);
-    users.forEach((user) => {
-      // verifications
-      if (
-        user.email == userEmail &&
-        user.password == userPwd &&
-        user.admin == true
-      ) {
-        // si les conditions sont remplies on fait ça
-        window.sessionStorage.loged = true;
-        window.location.href = "../index.html";
-        // console.log("je suis conecté");
-      } else {
-        //message d'erreur
-        email.classList.add("inputErrorLogin");
-        password.classList.add("inputErrorLogin");
-        messageErreur.textContent =
-          "Votre email ou votre mot de passe est incorrect";
-      }
+  try {
+    const response = await fetch("http://localhost:5678/api/users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(login),
     });
-  });
-}
-login();
+
+    if (!response.ok) {
+      const errorLogin = document.querySelector("p");
+      errorLogin.textContent = "Erreur dans l'identifiant ou le mot de passe";
+      throw new Error("Erreur dans l'identifiant ou le mot de passe");
+    }
+
+    const data = await response.json();
+    const { userId, token } = data;
+    window.sessionStorage.setItem("token", token);
+    window.sessionStorage.setItem("userId", userId);
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Une erreur est survenue : ", error);
+  }
+});
