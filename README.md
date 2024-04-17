@@ -2,6 +2,8 @@
 
 Code du projet 6 d'intégrateur web.
 
+Url : https://hugo31620.github.io/Projet-Java/FrontEnd/
+
 ## Information pour le lancer le code
 
  - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
