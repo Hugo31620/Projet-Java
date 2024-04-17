@@ -9,16 +9,67 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/73db696eb9.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+
+<aside class="mode-admin" aria-hidden="true" style="display: none;">
+	<div class="admin-edition">
+		<i class="fa-solid fa-pen-to-square" id="Icone"></i>
+		<p>Mode édition</p>
+	</div>
+
+</aside>
+
+<aside class="modal">
+	<div class="modal_body">
+		<p><i class="fa-solid fa-xmark"></i></p>
+		<h3>Galerie photo</h3>
+		<div class="galerie"></div>
+		<button>Ajouter une photo</button>
+	</div>
+	<div class="modalAjout">
+		<div class="nouvellePhoto"></div>
+		<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
+		<span class="xmark"><i class="fa-solid fa-xmark"></i></span>
+		<h3>Ajout photo</h3>
+		<form id="formAjout">
+			<div class="containerAddPhoto">
+				<i class="fa-regular fa-image"></i>
+				<label for="file" class="labelFile">+ Ajouter photo</label>
+				<p>jpg,png : 4mo max</p>
+				<input type="file" name="image" id="file" accept="image/jpg, image/png" required>
+				<img id="previewImage" src="#" alt="Aperçu de l'image">
+			</div>
+			<label for="title">Titre</label>
+			<input type="text" name="title" id="title" required>
+			<label for="categoryInput">Catégorie</label>
+			<select id="categoryInput" name="category" required></select>
+			<div class="container-button-add-work">
+				<button type="submit" class="button-add-work">Valider</button>
+			</div>
+		</form>
+	</div>
+</aside>
+
+
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<a href="#portfolio">
+				<li>projets</li>
+			</a>
+			<a href="#contact">
+				<li>contact</li>
+			</a>
+			<a href="login.html">
+				<li class="js-alredy-logged">login</li>
+			</a>
+			<a href="https://www.instagram.com" target="_blank">
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</a>
 		</ul>
 	</nav>
 </header>
@@ -35,53 +86,22 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<div class="titrebouton">
+			<h2>Mes Projets</h2>
+			<button class="button_modal"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
 		</div>
+
+		<div class="filtres">
+			<button id="0">Tous</button>
+		</div>
+
+		<div class="gallery"> <!--
+			
+		Code en Javascript
+
+		-->
+		</div>
+
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -106,5 +126,6 @@
 	</nav>
 </footer>
 <script src="portfolio.js"></script>
+<script src="modale.js"></script>
 </body>
 </html>

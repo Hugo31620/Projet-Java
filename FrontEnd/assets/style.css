@@ -233,3 +233,182 @@ aside .admin-edition {
 	margin-right: 20px;
 	font-size: 15px;
 }
+
+
+.titrebouton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+.titrebouton h2 {
+	margin-right: 10px; /* ajoute un espace entre le titre et le bouton */
+}
+
+.titrebouton button {
+	display: none;
+	padding-right: 20px;
+	padding-bottom: -20px;
+	border: none;
+}
+
+.titrebouton i {
+	margin-right: 20px;
+}
+
+.modal {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(128, 128, 128, 0.5);
+}
+
+.modal_body {
+	background-color: white;
+	width: 630px;
+	height: 688px;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	position: relative;
+
+}
+
+p i {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+	cursor: pointer;
+	font-size: large;
+}
+
+.modal_body button {
+	border: 1px solid #1D6154;
+	border-radius: 25px;
+	padding: 5px 20px 5px 20px;
+	color: white;
+	background-color: #1D6154;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.modal_body h3 {
+	position: relative;
+	bottom: 25px;
+	font-weight: 500;
+	font-size: 24px;
+}
+
+
+.modal_body .galerie {
+	display: flex;
+  	justify-content: flex-start;
+	flex-wrap: wrap;
+  	align-items: center;
+	margin-left: 50px;
+	margin-right: 50px;
+	position: relative;
+	bottom: 30px;
+
+}
+
+.modal_body .galerie img {
+	height: 103px;
+	width: 80px;
+
+}
+
+.modal_body .galerie figure {
+	flex: 0 0 20%;
+	margin-bottom: 30px;
+}
+
+.modal_body span {
+	display: inline-block;
+	position: relative;
+	background-color: black;
+	padding: 2px;
+	bottom: 85px;
+	left: 75px;
+	.fa-trash-can {
+		color: white;
+		font-size: 10px;
+	}
+
+}
+
+.modalAjout {
+	background-color: white;
+	width: 630px;
+	height: 688px;
+	border-radius: 15px;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	position: relative;
+	.fa-arrow-left {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		font-size: 20px;
+		cursor: pointer;
+	}
+	.fa-xmark {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		font-size: 20px;
+		cursor: pointer;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 80%;
+		width: 80%;
+		gap: 10px;
+		.containerAddPhoto {
+			background-color: rgba(135, 229, 250, 0.5);
+			height: 30%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			label {
+				background-color: black;
+				color: white;
+				padding: 5px 10px;
+			}
+			input {
+				display: none;
+			}
+			.fa-image {
+				font-size: 3.5em;
+				color: aquamarine;
+			}
+			img {
+				display: none;
+				max-width: 100%;
+				height: 100%;
+			}
+
+		}
+		.button {
+			background-color: white;
+			padding: 5px 10px;
+			border-radius: 25px;
+			border: none;
+			&:focus {
+				background-color: black;
+				color: white;
+			}
+		}
+	}
+
+}
