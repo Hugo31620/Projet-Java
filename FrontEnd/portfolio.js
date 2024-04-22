@@ -70,28 +70,62 @@ affichageCategory();
 
 async function filterCategory() {
   const allProjet = await getWorks();
-  console.log(allProjet)
-  const buttons = document.querySelectorAll(".filtres button")
-  console.log(buttons)
+  console.log(allProjet);
+  const buttons = document.querySelectorAll(".filtres button");
+  console.log(buttons);
+  buttons.forEach(button => {
+    button.addEventListener("click", async (event) => { // Utilisation de 'async' ici
+      const btnId = event.target.id;
+      resetProjet(); // Efface tous les projets affichés
+      let triCategory;
+      if (btnId !== "0") { //Tri les photos 
+        triCategory = allProjet.filter((element) => {
+          return element.categoryId == btnId;
+        });
+      } else {
+        triCategory = allProjet;
+      }
+      triCategory.forEach((element) => {
+        creationWorks(element);
+      });
+    });
+  });
+}
+
+// Fonction pour mettre à jour dynamiquement la liste des projets
+async function refreshWorks() {
+  const allProjet = await getWorks();
+  resetProjet(); // Efface tous les projets affichés
+  allProjet.forEach((element) => {
+    creationWorks(element);
+  });
+}
+
+
+/*
+async function filterCategory() {
+  const allProjet = await getWorks();
+  console.log(allProjet);
+  const buttons = document.querySelectorAll(".filtres button");
+  console.log(buttons);
   buttons.forEach(button => {
     button.addEventListener("click", (event) => {
-      btnId=event.target.id
-      resetProjet();
-      if (btnId !== "0") { // verifie sur quels boutons on appuie et enregistre dans un tableau
+      const btnId = event.target.id;
+      resetProjet(); // Efface tous les projets affichés
+      if (btnId !== "0") { //Tri les photos 
         const triCategory = allProjet.filter((element) => {
-          return element.categoryId == btnId
+          return element.categoryId == btnId;
         });
         triCategory.forEach((element) => {
           creationWorks(element);
-          
         });
-
-      }else{
+      } else {
+        // Si le bouton "Tous" est sélectionné, afficher tous les projets
         affichageWorks();
       }
-    })
-  })
-}
+    });
+  });
+} */
 
 filterCategory()
 
@@ -134,6 +168,3 @@ function modeEdition() {
   const modeAdmin = document.querySelector(".mode-admin");
   modeAdmin.removeAttribute("style")
 }
-
-
-

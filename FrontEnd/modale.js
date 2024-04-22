@@ -43,7 +43,7 @@ async function displayGalerie() {
         figures.appendChild(img);
         Galerie.appendChild(figures);
     });
-
+    filterCategory();
     Delete()
 }
 
@@ -174,33 +174,38 @@ const title = document.querySelector(".modalAjout #title");
 const category = document.querySelector(".modalAjout #categoryInput");
 const token = window.sessionStorage.getItem("token");
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+async function addNewProject() {
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('http://localhost:5678/api/works', {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
     
-    const formData = new FormData(form);
-    
-    try {
-        const response = await fetch('http://localhost:5678/api/works', {
-            method: "POST",
-            body: formData,
-            headers: {
-                Authorization: `Bearer ${token}`
+            if (!response.ok) {
+                throw new Error("Erreur lors de l'envoi du fichier");
             }
-        });
-
-        if (!response.ok) {
-            throw new Error("Erreur lors de l'envoi du fichier");
+    
+            const data = await response.json();
+            projet.innerHTML = ""; 
+            displayGalerie();
+            affichageWorks();
+            form.reset();
+            modalbody.style.display = "flex";
+            modalAjoutPhoto.style.display = "none";
+            preview.style.display = "none";
+        } catch (error) {
+            console.error("Erreur :", error);
         }
+    });
+    await filterCategory();
+}
 
-        const data = await response.json();
-        projet.innerHTML = ""; 
-        displayGalerie();
-        affichageWorks();
-        form.reset();
-        modalbody.style.display = "flex";
-        modalAjoutPhoto.style.display = "none";
-        preview.style.display = "none";
-    } catch (error) {
-        console.error("Erreur :", error);
-    }
-});
+addNewProject()
