@@ -29,6 +29,7 @@ async function affichageWorks() {
 
 affichageWorks();
 
+//Création de la galerie
 function creationWorks(element) {
   const figure = document.createElement("figure");
   const img = document.createElement("img");
@@ -70,9 +71,7 @@ affichageCategory();
 
 async function filterCategory() {
   const allProjet = await getWorks();
-  console.log(allProjet);
   const buttons = document.querySelectorAll(".filtres button");
-  console.log(buttons);
   buttons.forEach(button => {
     button.addEventListener("click", async (event) => { // Utilisation de 'async' ici
       const btnId = event.target.id;
@@ -102,31 +101,6 @@ async function refreshWorks() {
 }
 
 
-/*
-async function filterCategory() {
-  const allProjet = await getWorks();
-  console.log(allProjet);
-  const buttons = document.querySelectorAll(".filtres button");
-  console.log(buttons);
-  buttons.forEach(button => {
-    button.addEventListener("click", (event) => {
-      const btnId = event.target.id;
-      resetProjet(); // Efface tous les projets affichés
-      if (btnId !== "0") { //Tri les photos 
-        const triCategory = allProjet.filter((element) => {
-          return element.categoryId == btnId;
-        });
-        triCategory.forEach((element) => {
-          creationWorks(element);
-        });
-      } else {
-        // Si le bouton "Tous" est sélectionné, afficher tous les projets
-        affichageWorks();
-      }
-    });
-  });
-} */
-
 filterCategory()
 
 // Quand on est connecté
@@ -144,9 +118,9 @@ function loginAdmin() {
 
       modeEdition();
 
-      buttonModal.style.display = "grid"
+      buttonModal.style.display = "flex"
 
-      // Vous êtes connecté, vous pouvez exécuter les actions nécessaires
+      // Gestion dans la console pour la connexion 
       console.log("Connecté");
   
     }
@@ -155,7 +129,8 @@ function loginAdmin() {
 
 loginAdmin()
 
-function logout() {  // Apparition de Logout quand on est connecté et disparition quand on click dessus
+// Apparition de Logout quand on est connecté et disparition quand on click dessus
+function logout() {  
   const logout = document.querySelector(".js-alredy-logged")
   logout.textContent = "Logout"
 

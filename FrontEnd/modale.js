@@ -1,4 +1,4 @@
-
+//Gestion affichage de la modal
 const modifier = document.querySelector("#portfolio button")
 const modalAll = document.querySelector(".modal")
 const fermerModal = document.querySelector(".modal_body p")
@@ -24,7 +24,7 @@ window.addEventListener('click', function(event) {
 });
 
 
-
+// Affichage de la galerie , filtre dynamique
 async function displayGalerie() {
     Galerie.innerHTML ="";
     const travaux= await getWorks();
@@ -49,6 +49,7 @@ async function displayGalerie() {
 
 displayGalerie()
 
+//Suppression d'un projet avec rendu dynamique
 function Delete() {
     const poubelle = document.querySelectorAll(".fa-trash-can");
     const token = window.sessionStorage.getItem("token");
@@ -72,26 +73,23 @@ function Delete() {
                     if (contentType && contentType.includes("application/json")) {
                         return response.json();
                     } else {
-                        console.log("Réponse vide ou non au format JSON");
                         return null;
                     }
                 }
             })
             .then((data) => {
-                if (data) {
+                if (data) { //avec donnée 
                     console.log("Suppression réussie", data);
+                    poub.parentElement.remove(); 
                     
-                    // Supprimer l'élément supprimé de la liste ou mettre à jour la liste
-                    poub.parentElement.remove(); // Suppose que poub est le bouton de suppression
-                    // ou, vous pouvez rafraîchir la liste complète depuis le serveur
-                    // displayGalerie(); // Par exemple
-                    
-                } else {
+                } else { //sans donnée
                     console.log("Suppression réussie");
                 }
                 
-                // Rafraîchir les données de la galerie ou de la liste concernée depuis le serveur
-                displayGalerie(); // ou affichageWorks() ou toute autre fonction pour rafraîchir les données
+                // Rafraîchir les données de la galerie dynamiquement
+                projet.innerHTML = "";
+                displayGalerie();
+                affichageWorks();
             })
             .catch((error) => {
                 console.error("Erreur :", error);
@@ -201,11 +199,13 @@ async function addNewProject() {
             modalbody.style.display = "flex";
             modalAjoutPhoto.style.display = "none";
             preview.style.display = "none";
+            console.log("Ajout d'un nouveau projet")
         } catch (error) {
-            console.error("Erreur :", error);
+            console.error("Erreur d'Ajout de photo :", error);
         }
     });
     await filterCategory();
 }
 
 addNewProject()
+
