@@ -75,6 +75,14 @@ async function filterCategory() {
   buttons.forEach(button => {
     button.addEventListener("click", async (event) => { // Utilisation de 'async' ici
       const btnId = event.target.id;
+
+      buttons.forEach(btn => {
+        btn.classList.remove("active");
+      });
+      
+      // Ajouter la classe "active" au bouton de filtre sélectionné
+      event.target.classList.add("active");
+
       resetProjet(); // Efface tous les projets affichés
       let triCategory;
       if (btnId !== "0") { //Tri les photos 
@@ -90,16 +98,6 @@ async function filterCategory() {
     });
   });
 }
-
-// Fonction pour mettre à jour dynamiquement la liste des projets
-async function refreshWorks() {
-  const allProjet = await getWorks();
-  resetProjet(); // Efface tous les projets affichés
-  allProjet.forEach((element) => {
-    creationWorks(element);
-  });
-}
-
 
 filterCategory()
 

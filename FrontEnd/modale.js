@@ -43,7 +43,7 @@ async function displayGalerie() {
         figures.appendChild(img);
         Galerie.appendChild(figures);
     });
-    filterCategory();
+    filterCategory(); //actualise le DOM sans recharger
     Delete()
 }
 
@@ -80,16 +80,18 @@ function Delete() {
             .then((data) => {
                 if (data) { //avec donnée 
                     console.log("Suppression réussie", data);
-                    poub.parentElement.remove(); 
+                    poub.parentElement.remove();
                     
                 } else { //sans donnée
                     console.log("Suppression réussie");
                 }
-                
-                // Rafraîchir les données de la galerie dynamiquement
                 projet.innerHTML = "";
                 displayGalerie();
                 affichageWorks();
+                const activeButton = document.querySelector(".filtres button.active");
+                if (activeButton) {
+                        activeButton.classList.remove("active");
+                }
             })
             .catch((error) => {
                 console.error("Erreur :", error);
@@ -196,9 +198,12 @@ async function addNewProject() {
             displayGalerie();
             affichageWorks();
             form.reset();
+            preview.style.display = "none"
+            labeladd.style.display = "flex"
+            iadd.style.display = "flex"
+            padd.style.display = "flex"
             modalbody.style.display = "flex";
             modalAjoutPhoto.style.display = "none";
-            preview.style.display = "none";
             console.log("Ajout d'un nouveau projet")
         } catch (error) {
             console.error("Erreur d'Ajout de photo :", error);
@@ -209,3 +214,26 @@ async function addNewProject() {
 
 addNewProject()
 
+function boutonValider() {
+    const imageInput = document.getElementById('file');
+    const titleInput = document.getElementById('title');
+    const categoryInput = document.getElementById('categoryInput');
+    const submitButton = document.querySelector('#formAjout .button-add-work');
+
+
+    const imageSelected = imageInput.files.length > 0;
+    // trim ne prend pas en compte si il y a que des espaces
+    const titleEntered = titleInput.value.trim() !== '';
+    const categorySelected = categoryInput.value.trim() !== '';
+
+    if (imageSelected && titleEntered && categorySelected) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true;
+    }
+}
+    
+// Ajouter des écouteurs d'événements pour les éléments du formulaire
+document.getElementById('file').addEventListener('change', boutonValider);
+document.getElementById('title').addEventListener('input', boutonValider);
+document.getElementById('categoryInput').addEventListener('change', boutonValider);

@@ -449,12 +449,11 @@ p i {
 	font-weight: 500;
 }
 
-#buttonReadyToWork{
-	background-color:#1D6154;
+.button-add-work[disabled] {
+	background-color: #abb3ba;
 }
 
-#buttonReadyToWork:hover{
-	filter: brightness(0.9);
-	box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-	cursor: default;
+.filtres button.active {
+    background-color: #1D6154;
+    color: white;
 }
